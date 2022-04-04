@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { ERROR, GET_EXPENSES, REQUEST_API, RESPONSE_API } from '../actions';
+import { ERROR, GET_EXPENSES, REMOVE, REQUEST_API, RESPONSE_API } from '../actions';
 
 const INITIAL_STATE = {
 
@@ -22,6 +22,9 @@ const wallet = (state = INITIAL_STATE, action) => {
     };
     return { ...state, expenses: [...state.expenses, expObj] };
   }
+  case REMOVE:
+    return { ...state, expenses: action.expenses };
+
   case ERROR:
     return { ...state, error: action.error };
   default:

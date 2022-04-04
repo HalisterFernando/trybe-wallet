@@ -41,14 +41,13 @@ class Wallet extends React.Component {
 
   sumExpenses = () => {
     const { expenses } = this.props;
-
     const valueAsk = expenses.map((el) => ({
       [el.currency]: Number(el.value),
       ask: Number(el.exchangeRates[el.currency].ask),
     }));
+    let total = 0;
 
     const currencies = expenses.map((el) => el.currency);
-    let total = 0;
     valueAsk.forEach((el, idx) => {
       total += el[currencies[idx]] * el.ask;
     });
@@ -58,6 +57,7 @@ class Wallet extends React.Component {
   render() {
     const { email, currencies } = this.props;
     const { value, description, currency, method, tag } = this.state;
+
     return (
       <div>
         <header>

@@ -2,8 +2,9 @@
 export const EMAIL = 'EMAIL';
 export const REQUEST_API = 'REQUEST_API';
 export const RESPONSE_API = 'RESPONSE_API';
-export const ERROR = 'ERROR';
 export const GET_EXPENSES = 'GET_EXPENSES';
+export const REMOVE = 'REMOVE';
+export const ERROR = 'ERROR';
 
 export const userEmail = (email) => ({
   type: EMAIL,
@@ -26,6 +27,11 @@ const requestFail = (error) => ({ type: ERROR, error });
 export const getExpenses = (expenses, exchangeRates) => ({
   type: GET_EXPENSES,
   expenses: { ...expenses, exchangeRates },
+});
+
+export const removeExpense = (expenses) => ({
+  type: REMOVE,
+  expenses,
 });
 
 export const fetchAPI = () => async (dispatch) => {
