@@ -35,23 +35,19 @@ class Table extends Component {
             <button
               type="button"
               id={ el.id }
-              data-testid="delete-btn"
-              onClick={ this.delete }
-            >
-              Excluir
-            </button>
-
-          </td>
-          <td>
-            <button
-              type="button"
-              id={ el.id }
               data-testid="edit-btn"
               onClick={ edit }
             >
               Editar
             </button>
-
+            <button
+              type="button"
+              id={ el.id }
+              data-testid="delete-btn"
+              onClick={ this.delete }
+            >
+              Excluir
+            </button>
           </td>
         </tr>
       </tbody>
