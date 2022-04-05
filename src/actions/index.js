@@ -4,6 +4,7 @@ export const REQUEST_API = 'REQUEST_API';
 export const RESPONSE_API = 'RESPONSE_API';
 export const GET_EXPENSES = 'GET_EXPENSES';
 export const REMOVE = 'REMOVE';
+export const EDIT = 'EDIT';
 export const ERROR = 'ERROR';
 
 export const userEmail = (email) => ({
@@ -31,6 +32,11 @@ export const getExpenses = (expenses, exchangeRates) => ({
 
 export const removeExpense = (expenses) => ({
   type: REMOVE,
+  expenses,
+});
+
+export const editExpense = (expenses) => ({
+  type: EDIT,
   expenses,
 });
 

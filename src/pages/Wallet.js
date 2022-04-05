@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchAPI, fetchExchanges } from '../actions';
+import { editExpense, fetchAPI, fetchExchanges, removeExpense } from '../actions';
 import Table from '../components/Table';
 
 class Wallet extends React.Component {
@@ -14,6 +14,8 @@ class Wallet extends React.Component {
       currency: '',
       method: '',
       tag: '',
+      addEdit: 'Adicionar despesa',
+      id: '',
     };
   }
 
@@ -28,15 +30,35 @@ class Wallet extends React.Component {
   };
 
   addExpenses = () => {
-    const { saveExpenses } = this.props;
-    saveExpenses(this.state);
-    this.setState({
-      value: '',
-      description: '',
-      currency: '',
-      method: '',
-      tag: '',
-    });
+    const { saveExpenses, expenses, edit } = this.props;
+    const { value, description, currency, method, tag, addEdit, id } = this.state;
+
+    if (addEdit === 'Adicionar despesa') {
+      saveExpenses({ value, description, currency, method, tag });
+      this.setState({
+        value: '',
+        description: '',
+        currency: '',
+        method: '',
+        tag: '',
+      });
+    } else {
+      const editedExpenses = expenses.map((el) => {
+        if (el.id === id) {
+          return ({
+            ...el,
+            value,
+            description,
+            currency,
+            method,
+            tag,
+            id: el.id,
+          });
+        } return el;
+      });
+
+      edit(editedExpenses);
+    }
   }
 
   sumExpenses = () => {
@@ -54,9 +76,24 @@ class Wallet extends React.Component {
     return total.toFixed(2);
   }
 
+  editExpenses = ({ target }) => {
+    const { expenses } = this.props;
+    const { id } = target;
+    const findExpense = expenses.find((el) => el.id === Number(id));
+    this.setState({
+      value: findExpense.value,
+      description: findExpense.description,
+      currency: findExpense.currency,
+      method: findExpense.method,
+      tag: findExpense.tag,
+      addEdit: 'Editar despesa',
+      id: findExpense.id,
+    });
+  };
+
   render() {
     const { email, currencies } = this.props;
-    const { value, description, currency, method, tag } = this.state;
+    const { value, description, currency, method, tag, addEdit } = this.state;
 
     return (
       <div>
@@ -91,6 +128,7 @@ class Wallet extends React.Component {
           <label htmlFor="currency">
             Moeda:
             <select
+              data-testid="currency-input"
               id="currency"
               name="currency"
               onChange={ this.handleInputs }
@@ -129,9 +167,9 @@ class Wallet extends React.Component {
               <option>Saúde</option>
             </select>
           </label>
-          <button type="button" onClick={ this.addExpenses }>Adicionar despesa</button>
+          <button type="button" onClick={ this.addExpenses }>{addEdit}</button>
         </form>
-        <Table />
+        <Table edit={ this.editExpenses } />
       </div>
     );
   }
@@ -147,6 +185,9 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   saveCurrency: () => dispatch(fetchAPI()),
   saveExpenses: (expenses) => dispatch(fetchExchanges(expenses)),
+  remove: (expenses) => dispatch(removeExpense(expenses)),
+  edit: (expenses) => dispatch(editExpense(expenses)),
+
 });
 
 Wallet.propTypes = {
@@ -155,6 +196,7 @@ Wallet.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   saveExpenses: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
+  edit: PropTypes.func.isRequired,
 
 };
 

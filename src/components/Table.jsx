@@ -15,6 +15,7 @@ class Table extends Component {
   };
 
   lineRender = (expenses) => {
+    const { edit } = this.props;
     const tableLines = expenses.map((el) => (
       <tbody key={ el.id }>
         <tr>
@@ -38,6 +39,17 @@ class Table extends Component {
               onClick={ this.delete }
             >
               Excluir
+            </button>
+
+          </td>
+          <td>
+            <button
+              type="button"
+              id={ el.id }
+              data-testid="edit-btn"
+              onClick={ edit }
+            >
+              Editar
             </button>
 
           </td>
@@ -81,6 +93,7 @@ const mapDispatchToProps = (dispatch) => ({
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
   remove: PropTypes.func.isRequired,
+  edit: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
