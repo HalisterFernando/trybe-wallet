@@ -39,9 +39,12 @@ class Login extends React.Component {
     const { email, password, isDisabled } = this.state;
     const { saveEmail } = this.props;
     return (
-      <div>
+      <div className="main-container">
+        <div>
+          <img src="../images/Wallet-icon.png" alt="wallet icon" />
+        </div>
         <h1>Login</h1>
-        <form>
+        <form className="form-container">
           <label htmlFor="email">
             <input
               data-testid="email-input"
@@ -66,6 +69,7 @@ class Login extends React.Component {
           <br />
           <Link to="/carteira">
             <button
+              className={ isDisabled ? 'btn-disable' : 'btn-able' }
               type="button"
               disabled={ isDisabled }
               onClick={ () => saveEmail(email) }
