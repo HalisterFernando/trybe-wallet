@@ -21,18 +21,22 @@ class Wallet extends React.Component {
 
   componentDidMount() {
     const { saveCurrency } = this.props;
+    // Realiza uma requisição a API para buscar as currencies ao montar o componente
     saveCurrency();
   }
 
+  // Validação dos inputs
   handleInputs = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   };
 
+  // Adiciona ítems na lista
   addExpenses = () => {
     const { saveExpenses, expenses, edit } = this.props;
     const { value, description, currency, method, tag, addEdit, id } = this.state;
 
+    // Salva infomações pertinentes do estado local no estado global
     if (addEdit === 'Adicionar despesa') {
       saveExpenses({ value, description, currency, method, tag });
       this.setState({
@@ -43,6 +47,7 @@ class Wallet extends React.Component {
         tag: '',
       });
     } else {
+      // Filtra o elemento a ser editado e altera a informações conforme as novas passadas no estado local
       const editedExpenses = expenses.map((el) => {
         if (el.id === id) {
           return ({
@@ -63,23 +68,33 @@ class Wallet extends React.Component {
 
   sumExpenses = () => {
     const { expenses } = this.props;
+
+    let total = 0;
+
+    // Array contando a currency e valores da despesa assim como taxa de câmbio
     const valueAsk = expenses.map((el) => ({
       [el.currency]: Number(el.value),
       ask: Number(el.exchangeRates[el.currency].ask),
     }));
-    let total = 0;
 
+    // Array com todas as currencies encontradas no estado global
     const currencies = expenses.map((el) => el.currency);
+
+    // Calcula o total percorrendo o array valueAsk reatribuindo o valor a variável total
     valueAsk.forEach((el, idx) => {
       total += el[currencies[idx]] * el.ask;
     });
+
     return total.toFixed(2);
   }
 
+  // Altera o estado local conforme as informações da despesa a ser alterada
   editExpenses = ({ target }) => {
     const { expenses } = this.props;
     const { id } = target;
+
     const findExpense = expenses.find((el) => el.id === Number(id));
+
     this.setState({
       value: findExpense.value,
       description: findExpense.description,
@@ -134,6 +149,7 @@ class Wallet extends React.Component {
               onChange={ this.handleInputs }
               value={ currency }
             >
+              {/* Retorna as currencies do estado global */}
               {currencies.map((coin, idx) => (<option key={ idx }>{coin}</option>))}
             </select>
           </label>
@@ -179,7 +195,6 @@ const mapStateToProps = (store) => ({
   email: store.user.email,
   currencies: store.wallet.currencies,
   expenses: store.wallet.expenses,
-  savedExpenses: store.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({

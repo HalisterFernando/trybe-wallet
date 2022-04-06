@@ -15,12 +15,14 @@ class Login extends React.Component {
     };
   }
 
+  // Validação dos inputs
   handleChange = ({ target }) => {
     const { name, value } = target;
 
     this.setState({ [name]: value }, () => this.inputValidation());
   }
 
+  // Validação do botão
   inputValidation = () => {
     const { email, password } = this.state;
 
@@ -59,9 +61,7 @@ class Login extends React.Component {
               id="password"
               value={ password }
               onChange={ this.handleChange }
-
             />
-
           </label>
           <br />
           <Link to="/carteira">

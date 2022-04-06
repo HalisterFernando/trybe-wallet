@@ -12,11 +12,13 @@ export const userEmail = (email) => ({
   email,
 });
 
+// Actions para constrolar requisição da API
+
 const requestAPI = () => ({ type: REQUEST_API });
 
 const responseAPI = (data) => {
   const currencies = Object.keys(data).filter((el) => el !== 'USDT');
-
+  // Retorna as currencies a partir das chaves do objeto retornado
   return {
     type: RESPONSE_API,
     currencies,
@@ -25,21 +27,25 @@ const responseAPI = (data) => {
 
 const requestFail = (error) => ({ type: ERROR, error });
 
+// Adiciona uma nova despesa realizando a requisição da API
 export const getExpenses = (expenses, exchangeRates) => ({
   type: GET_EXPENSES,
   expenses: { ...expenses, exchangeRates },
 });
 
+// Remove um ítem da lista
 export const removeExpense = (expenses) => ({
   type: REMOVE,
   expenses,
 });
 
+// Edita um ítem da lista
 export const editExpense = (expenses) => ({
   type: EDIT,
   expenses,
 });
 
+// Thunk para retorno das currencies
 export const fetchAPI = () => async (dispatch) => {
   dispatch(requestAPI());
   try {
@@ -52,6 +58,7 @@ export const fetchAPI = () => async (dispatch) => {
   }
 };
 
+// Thunk para realizar requisição da API ao clicar no botão "Adicionar despesa"
 export const fetchExchanges = (expenses) => async (dispatch) => {
   dispatch(requestAPI());
   try {

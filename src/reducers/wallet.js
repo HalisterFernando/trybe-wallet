@@ -15,18 +15,14 @@ const wallet = (state = INITIAL_STATE, action) => {
     return state;
   case RESPONSE_API:
     return { ...state, currencies: action.currencies };
-  case GET_EXPENSES: {
-    const expObj = {
-      ...action.expenses,
-      id: state.expenses.length,
-    };
-    return { ...state, expenses: [...state.expenses, expObj] };
-  }
+  case GET_EXPENSES:
+    return { ...state,
+      expenses: [...state.expenses,
+        { ...action.expenses, id: state.expenses.length }] };
   case REMOVE:
     return { ...state, expenses: action.expenses };
   case EDIT:
     return { ...state, expenses: action.expenses };
-
   case ERROR:
     return { ...state, error: action.error };
   default:

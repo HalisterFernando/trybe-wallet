@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { removeExpense } from '../actions';
 
+// Componente responsável por renderizar a tabela na página Wallet
 class Table extends Component {
+  // Deletar um ítem da lista filtrando o ítem a ser removido
   delete = ({ target }) => {
     const { expenses, remove } = this.props;
     const { id } = target;
@@ -14,6 +16,7 @@ class Table extends Component {
     remove(filteredExpenses);
   };
 
+  // Renderiza as linhas da tabela
   lineRender = (expenses) => {
     const { edit } = this.props;
     const tableLines = expenses.map((el) => (
@@ -28,7 +31,9 @@ class Table extends Component {
           <td>
             {((Number(el.value) * (Number(el.exchangeRates[el.currency].ask) * 100))
              / 100).toFixed(2)}
-
+            {' '}
+            {/* Multipliquei o valor do ask por 100
+            a fim de manter duas casas pós vírgula na aplicação */}
           </td>
           <td>Real</td>
           <td>
@@ -72,7 +77,7 @@ class Table extends Component {
             <th>Editar/Excluir</th>
           </tr>
         </thead>
-        { this.lineRender(expenses)}
+        {this.lineRender(expenses)}
       </table>
     );
   }

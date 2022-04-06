@@ -9,7 +9,7 @@ function App() {
       <Route path="/carteira">
         <Wallet />
       </Route>
-      <Route path="/">
+      <Route exact path="/">
         <Login />
       </Route>
     </Switch>
