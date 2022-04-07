@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap') ;
+
+
 * {
   box-sizing: border-box;
   font-size: 100%;
@@ -5,8 +8,10 @@
   padding: 0;
 }
 
-.main-container {
+/* Login */
+.login-main-container {
   align-items: center;
+  background-color: #606f7b;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -14,8 +19,17 @@
   justify-content: center;
 }
 
-.main-container h1 {
-  font-size: 2rem;
+.wallet {
+  height: 200px;
+  width: 200px;
+}
+
+.login-main-container h1 {
+  color: white;
+  font-family: Secular One, sans-serif;
+  font-size: 3rem;
+  font-weight: 100;
+  text-shadow: 2px 2px #4fb39c;
 }
 
 .form-container {
@@ -24,31 +38,186 @@
   flex-direction: column;
 }
 
+
 .form-container input {
+  border: none;
   border-radius: 5px;
-  box-shadow: 0 1px 3px green;
+  box-shadow: 0 1px 3px #4fb39c;
   font-size: 1.2rem;
   padding: 5px;
 }
 
+
 .btn-disable {
-  background-color: rgba(0, 128, 0, 0.267);
+  background-color: #4fb39c56;
+  border: none;
   border-radius: 5px;
   box-shadow: 1px 1px black;
   color: white;
+  font-size: 1.5rem;
   font-weight: 700;
   padding: 5px;
   text-shadow: 1px 1px black;
   width: 290px;
 }
 
+
 .btn-able {
+  background-color: #4fb39c;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px black;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 5px;
+  text-shadow: 1px 1px black;
+  width: 290px;
+
+}
+
+/* Wallet */
+.wallet-main-container header {
+  align-items: center;
+  background-color: #606f7b;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.wallet2 {
+  height: 80px;
+  margin-right: 20px;
+  width: 80px;
+}
+
+.icon-email {
+  align-items: center;
+  display: flex;
+}
+
+.icon-email span {
+  color: white;
+  font-family: Secular One, sans-serif;
+  font-size: 2rem;
+  text-shadow: 2px 2px black;
+
+
+}
+
+.total {
+  color: white;
+  font-family: Secular One, sans-serif;
+  font-size: 2rem;
+  text-shadow: 2px 2px black;
+
+}
+
+.money {
+  margin-right: 20px;
+}
+
+.wallet-main-container form {
+  align-items: center;
+  background-color: #606f7b;
+  color: white;
+  display: flex;
+  font-family: Secular One, sans-serif;
+  font-size: 1.2rem;
+  justify-content: space-between;
+  padding: 5px 10px 20px 5px;
+  text-shadow: 2px 2px black;
+}
+
+.wallet-main-container form input {
+  padding: 0 10px;
+}
+
+.add {
+  background-color: rgba(0, 128, 0, 0.247);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px black;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 25px;
+  padding: 5px;
+  text-shadow: 1px 1px black;
+  transition: 0.2s;
+  width: 200px;
+
+}
+
+.edit {
+  background-color: rgba(255, 166, 0, 0.685);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px black;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 25px;
+  padding: 5px;
+  text-shadow: 1px 1px black;
+  transition: 0.2s;
+  width: 200px;
+}
+
+.add:hover {
   background-color: green;
+  box-shadow: 0 0 5px white;
+}
+
+.edit:hover {
+  background-color: orange;
+  box-shadow: 0 0 5px white;
+}
+
+#method {
+  width: 200px;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-btn {
+  background-color: orange;
+  border: none;
   border-radius: 5px;
   box-shadow: 1px 1px black;
   color: white;
   font-weight: 700;
   padding: 5px;
-  text-shadow: 1px 1px black;
-  width: 290px;
+  transition: 0.2s;
+
+}
+
+.edit-btn:hover {
+  background-color: white;
+  border: 1px solid orange;
+  color: orange;
+}
+
+.delete-btn {
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px black;
+  color: white;
+  font-weight: 700;
+  margin-left: 5px;
+  padding: 5px;
+  transition: 0.2s;
+
+
+}
+
+.delete-btn:hover {
+  background-color: white;
+  border: 1px solid red;
+  color: red;
+
 }

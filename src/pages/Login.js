@@ -39,11 +39,11 @@ class Login extends React.Component {
     const { email, password, isDisabled } = this.state;
     const { saveEmail } = this.props;
     return (
-      <div className="main-container">
+      <div className="login-main-container">
         <div>
-          <img src="../images/Wallet-icon.png" alt="wallet icon" />
+          <img className="wallet" src="./images/Wallet-icon.png" alt="wallet icon" />
         </div>
-        <h1>Login</h1>
+        <h1>Trybe Wallet</h1>
         <form className="form-container">
           <label htmlFor="email">
             <input

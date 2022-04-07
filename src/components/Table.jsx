@@ -10,9 +10,8 @@ class Table extends Component {
     const { expenses, remove } = this.props;
     const { id } = target;
     let filteredExpenses = [];
-    if (expenses.length > 0) {
-      filteredExpenses = expenses.filter((el) => el.id !== Number(id));
-    }
+    filteredExpenses = expenses.filter((el) => el.id !== Number(id));
+
     remove(filteredExpenses);
   };
 
@@ -21,23 +20,24 @@ class Table extends Component {
     const { edit } = this.props;
     const tableLines = expenses.map((el) => (
       <tbody key={ el.id }>
-        <tr>
-          <td>{el.description}</td>
-          <td>{el.tag}</td>
-          <td>{el.method}</td>
-          <td>{Number(el.value).toFixed(2)}</td>
-          <td>{el.exchangeRates[el.currency].name.split('/')[0]}</td>
-          <td>{Number(el.exchangeRates[el.currency].ask).toFixed(2)}</td>
-          <td>
+        <tr height="50px" bgcolor="#dae1e7">
+          <td align="middle">{el.description}</td>
+          <td align="middle">{el.tag}</td>
+          <td align="middle">{el.method}</td>
+          <td align="middle">{Number(el.value).toFixed(2)}</td>
+          <td align="middle">{el.exchangeRates[el.currency].name.split('/')[0]}</td>
+          <td align="middle">{Number(el.exchangeRates[el.currency].ask).toFixed(2)}</td>
+          <td align="middle">
             {((Number(el.value) * (Number(el.exchangeRates[el.currency].ask) * 100))
              / 100).toFixed(2)}
             {' '}
             {/* Multipliquei o valor do ask por 100
             a fim de manter duas casas pós vírgula na aplicação */}
           </td>
-          <td>Real</td>
-          <td>
+          <td align="middle"><font>Real</font></td>
+          <td align="middle">
             <button
+              className="edit-btn"
               type="button"
               id={ el.id }
               data-testid="edit-btn"
@@ -46,6 +46,7 @@ class Table extends Component {
               Editar
             </button>
             <button
+              className="delete-btn"
               type="button"
               id={ el.id }
               data-testid="delete-btn"
@@ -63,8 +64,8 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <table>
-        <thead>
+      <table width="100%" border="1px" bordercolor="#606f7b">
+        <thead bgcolor="#4fb39c">
           <tr>
             <th>Descrição</th>
             <th>Tag</th>

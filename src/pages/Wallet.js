@@ -11,9 +11,9 @@ class Wallet extends React.Component {
     this.state = {
       value: '',
       description: '',
-      currency: '',
-      method: '',
-      tag: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
       addEdit: 'Adicionar despesa',
       id: '',
     };
@@ -35,17 +35,19 @@ class Wallet extends React.Component {
   addExpenses = () => {
     const { saveExpenses, expenses, edit } = this.props;
     const { value, description, currency, method, tag, addEdit, id } = this.state;
-
+    const INITIAL_STATE = {
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+      addEdit: 'Adicionar despesa',
+      id: '',
+    };
     // Salva infomações pertinentes do estado local no estado global
     if (addEdit === 'Adicionar despesa') {
       saveExpenses({ value, description, currency, method, tag });
-      this.setState({
-        value: '',
-        description: '',
-        currency: '',
-        method: '',
-        tag: '',
-      });
+      this.setState({ ...INITIAL_STATE });
     } else {
       // Filtra o elemento a ser editado e altera a informações conforme as novas passadas no estado local
       const editedExpenses = expenses.map((el) => {
@@ -63,6 +65,7 @@ class Wallet extends React.Component {
       });
 
       edit(editedExpenses);
+      this.setState({ ...INITIAL_STATE });
     }
   }
 
@@ -111,15 +114,26 @@ class Wallet extends React.Component {
     const { value, description, currency, method, tag, addEdit } = this.state;
 
     return (
-      <div>
+      <div className="wallet-main-container">
         <header>
-          <p data-testid="email-field">{email}</p>
-          <p data-testid="total-field">{this.sumExpenses()}</p>
-          <p data-testid="header-currency-field">BRL</p>
+          <div className="icon-email">
+            <img className="wallet2" src="./images/Wallet-icon2.png" alt="logo" />
+            <span data-testid="email-field">{email}</span>
+          </div>
+          <div className="total">
+            <span
+              className="money"
+              data-testid="total-field"
+            >
+              {`$${this.sumExpenses()}`}
+            </span>
+            <span data-testid="header-currency-field">BRL</span>
+          </div>
         </header>
         <form>
           <label htmlFor="outcome">
             Valor da despesa:
+            <br />
             <input
               data-testid="value-input"
               type="number"
@@ -131,6 +145,7 @@ class Wallet extends React.Component {
           </label>
           <label htmlFor="description">
             Descrição:
+            <br />
             <input
               data-testid="description-input"
               type="text"
@@ -142,6 +157,7 @@ class Wallet extends React.Component {
           </label>
           <label htmlFor="currency">
             Moeda:
+            <br />
             <select
               data-testid="currency-input"
               id="currency"
@@ -155,6 +171,7 @@ class Wallet extends React.Component {
           </label>
           <label htmlFor="method">
             Forma de pagamento:
+            <br />
             <select
               data-testid="method-input"
               id="method"
@@ -162,13 +179,14 @@ class Wallet extends React.Component {
               onChange={ this.handleInputs }
               value={ method }
             >
-              <option>Dinheiro</option>
+              <option selected>Dinheiro</option>
               <option>Cartão de crédito </option>
               <option>Cartão de débito</option>
             </select>
           </label>
           <label htmlFor="tag">
             Categoria:
+            <br />
             <select
               data-testid="tag-input"
               id="tag"
@@ -176,16 +194,25 @@ class Wallet extends React.Component {
               onChange={ this.handleInputs }
               value={ tag }
             >
-              <option>Alimentação</option>
+              <option selected>Alimentação</option>
               <option>Lazer </option>
               <option>Trabalho</option>
               <option>Transporte</option>
               <option>Saúde</option>
             </select>
           </label>
-          <button type="button" onClick={ this.addExpenses }>{addEdit}</button>
+          <button
+            className={ addEdit === 'Editar despesa' ? 'edit' : 'add' }
+            type="button"
+            onClick={ this.addExpenses }
+          >
+            {addEdit}
+
+          </button>
         </form>
-        <Table edit={ this.editExpenses } />
+        <div className="table-container">
+          <Table edit={ this.editExpenses } />
+        </div>
       </div>
     );
   }
