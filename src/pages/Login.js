@@ -51,6 +51,7 @@ class Login extends React.Component {
               type="text"
               name="email"
               id="email"
+              placeholder="Email"
               value={ email }
               onChange={ this.handleChange }
             />
@@ -62,6 +63,7 @@ class Login extends React.Component {
               type="password"
               name="password"
               id="password"
+              placeholder="Senha"
               value={ password }
               onChange={ this.handleChange }
             />
